@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Omkar Mahesh Patil  </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --background-color: #0A0A0A;
+        --text-color: #EAEAEA;
+        --text-secondary-color: #A1A1A1;
+        --card-background: #161616;
+        --border-color: #262626;
+        --accent-color: #8A2BE2;
+        --accent-glow: rgba(138, 43, 226, 0.5);
+        --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+      * { cursor: none; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-family: var(--font-main);
+        text-align: center;
+        perspective: 1500px;
+        overflow-x: hidden;
+      }
+      .main-header {
+        position: fixed;
+        width: 100%;
+        top: 0; left: 0;
+        z-index: 1000;
+        background: rgba(10, 10, 10, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+      }
+      .main-header nav {
+        max-width: 1200px; margin: 0 auto;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      .nav-links {
+        display: flex;
+        gap: 30px;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .nav-links a {
+        color: var(--text-secondary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .nav-links a:hover {
+        color: var(--text-color);
+      }
+      section {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 140px 30px;
+        position: relative;
+        border-bottom: 1px solid var(--border-color);
+      }
+      #home { border-bottom: none; }
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 800px; height: 600px;
+        background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+        opacity: 0.3;
+        animation: pulse 10s infinite ease-in-out;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.2; transform: translateX(-50%) scale(0.9); }
+        50% { opacity: 0.4; transform: translateX(-50%) scale(1.1); }
+      }
+      .hero-title {
+        font-size: clamp(3rem, 10vw, 7rem);
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+        background: linear-gradient(90deg, #fff, #bbb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-subtitle {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+        font-weight: 400;
+        color: var(--text-secondary-color);
+        max-width: 700px;
+        margin: 40px auto 0 auto;
+        line-height: 1.6;
+      }
+      #about { 
+        background-color: var(--card-background);
+      }
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        max-width: 1100px;
+        text-align: left;
+        margin: auto;
+      }
+      .profile-photo {
+        width: 300px; height: 300px;
+        border-radius: 20px;
+        object-fit: cover;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      }
+      .about-text h3 {
+        font-size: 2.5rem;
+        margin: 0 0 15px 0;
+        font-weight: 600;
+      }
+      .about-text p {
+        font-size: 1.1rem;
+        color: var(--text-secondary-color);
+        max-width: 600px;
+        line-height: 1.7;
+      }
+      .section-title { max-width: 900px; margin-bottom: 80px; }
+      .section-title h2 {
+        font-size: clamp(3rem, 8vw, 5.5rem);
+        font-weight: 700;
+        line-height: 1.1;
+        margin: 0;
+        letter-spacing: -0.03em;
+      }
+      .section-title p {
+        font-size: 1.3rem;
+        color: var(--text-secondary-color);
+        margin-top: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        width: 100%;
+        max-width: 1200px;
+      }
+      .grid-card {
+        background: var(--card-background);
+        padding: 35px;
+        border-radius: 20px;
+        text-align: left;
+        border: 1px solid var(--border-color);
+        position: relative;
+        overflow: hidden;
+      }
+      .grid-card::before {
+        content: "";
+        position: absolute;
+        left: var(--x, 50%); top: var(--y, 50%);
+        transform: translate(-50%, -50%);
+        width: 0; height: 0;
+        background: radial-gradient(circle closest-side, var(--accent-glow), transparent);
+        border-radius: 50%;
+        transition: width 0.3s ease, height 0.3s ease;
+      }
+      .grid-card:hover::before { width: 300px; height: 300px; }
+      .grid-card h4 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        position: relative; z-index: 1;
+      }
+      .grid-card p {
+        font-size: 1rem;
+        color: var(--text-secondary-color);
+        margin: 0;
+        line-height: 1.6;
+        position: relative; z-index: 1;
+      }
+      .project-card { padding: 0; display: flex; flex-direction: column; }
+      .project-animation-container {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        position: relative;
+        background-color: #111;
+      }
+      .project-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+      .project-content {
+        padding: 35px;
+        background-color: rgba(10,10,10,0.3);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        flex-grow: 1;
+        position: relative;
+      }
+      .project-tags {
+        margin-top: 20px;
+        display: flex; flex-wrap: wrap;
+        gap: 10px;
+        position: relative; z-index: 1;
+      }
+      .project-tags span {
+        background-color: rgba(42, 42, 42, 0.8);
+        color: #ccc;
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .skills-subtitle {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: var(--text-secondary-color);
+        margin-top: 60px;
+        margin-bottom: 30px;
+      }
+      .tag-cloud-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        max-width: 1000px;
+      }
+      .skill-tag {
+        background: var(--card-background);
+        padding: 12px 24px;
+        border-radius: 50px;
+        border: 1px solid var(--border-color);
+        font-size: 1rem;
+        font-weight: 500;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+      }
+      .skill-tag:hover {
+        transform: scale(1.05);
+        border-color: var(--accent-color);
+      }
+      #education {
+        min-height: 90vh;
+        background-color: var(--card-background);
+        position: relative;
+        overflow: hidden;
+      }
+      #education::after {
+        content: 'EDUCATION';
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: clamp(10rem, 30vw, 22rem);
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.02);
+        z-index: 0;
+        pointer-events: none;
+      }
+      .education-content { position: relative; z-index: 1; max-width: 800px; }
+      .education-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin: 0;
+      }
+      .education-subtitle {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 500;
+        color: var(--accent-color);
+        margin: 10px 0;
+      }
+      .education-university {
+        font-size: 1.2rem;
+        color: var(--text-secondary-color);
+        margin: 0 0 30px 0;
+      }
+      .education-details p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: var(--text-secondary-color);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      #contact { background: transparent; border-bottom: none; }
+      #contact h2 {
+        font-size: clamp(2.5rem, 7vw, 5rem);
+        max-width: 800px;
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+      .contact-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-secondary-color);
+        max-width: 500px;
+        margin-top: 20px;
+      }
+      .email-link {
+        color: var(--text-color);
+        font-size: 1.8rem;
+        font-weight: 500;
+        text-decoration: none;
+        margin-top: 40px;
+        display: inline-block;
+        position: relative;
+        padding-bottom: 5px;
+      }
+      .email-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%; height: 2px;
+        background: var(--accent-color);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s ease-out;
+      }
+      .email-link:hover::after { transform: scaleX(1); transform-origin: left; }
+      .social-links { margin-top: 60px; display: flex; gap: 30px; }
+      .social-links a {
+        color: var(--text-secondary-color);
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      .social-links svg { width: 28px; height: 28px; }
+      .social-links a:hover { color: var(--text-color); transform: scale(1.1); }
+      [data-scroll-speed] { will-change: transform; transition: transform 0.1s linear; }
+      .cursor {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+      }
+      .cursor-dot { width: 6px; height: 6px; background-color: var(--text-color); }
+      .cursor-outline { width: 30px; height: 30px; border: 1px solid var(--text-secondary-color); opacity: 0.5; }
+      .cursor.grow { transform: scale(3); background-color: var(--accent-glow); border: none; }
+      @media (max-width: 768px) {
+        .about-content { flex-direction: column; }
+        .profile-photo { width: 200px; height: 200px; }
+        .about-text { text-align: center; }
+        .grid { grid-template-columns: 1fr; }
+        .cursor { display: none; }
+        * { cursor: auto; }
+        .main-header nav { flex-direction: column; gap: 15px; }
+      }
+    </style>
+</head>
+<body>
+    <div class="cursor cursor-dot"></div>
+    <div class="cursor cursor-outline"></div>
+
+    <header class="main-header">
+      <nav>
+        <div class="logo">Omkar M. Patil</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero-section">
+          <h1 class="hero-title" data-scroll-speed="0.5">Java | CI/CD | AWS.</h1>
+          <h2 class="hero-subtitle" data-scroll-speed="0.2">Crafting scalable systems, intelligent automations, and data-driven solutions from concept to deployment.</h2>
+      </section>
+
+      <section id="about">
+        <div class="about-content">
+          <img src="profile.jpg" alt="Omkar Mahesh Patil" class="profile-photo" data-scroll-speed="0.2" data-scroll-rotate="5"/>
+          <div class="about-text" data-scroll-speed="0.1">
+            <h3>About Me</h3>
+            <p>A dedicated software engineer with a Master's in Cloud Computing, I specialize in building high-performance applications with the Java ecosystem. Skilled in DevOps and data engineering, I have a strong track record of learning new tools quickly and thrive on making a hands-on impact in a collaborative team environment.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section id="skills">
+        <div class="section-title" data-scroll-speed="0.4">
+          <h2>Skills & Certifications</h2>
+          <p>My technical toolkit and professional credentials.</p>
+        </div>
+
+        <h3 class="skills-subtitle" data-scroll-speed="0.2">Core Technologies</h3>
+        <div class="tag-cloud-container">
+          <div class="skill-tag" data-scroll-speed="0.1">Java</div>
+          <div class="skill-tag" data-scroll-speed="0.15">Python</div>
+          <div class="skill-tag" data-scroll-speed="0.1">Spring Boot</div>
+          <div class="skill-tag" data-scroll-speed="0.2">REST API</div>
+          <div class="skill-tag" data-scroll-speed="0.1">AWS</div>
+          <div class="skill-tag" data-scroll-speed="0.15">Docker</div>
+          <div class="skill-tag" data-scroll-speed="0.1">Kubernetes</div>
+          <div class="skill-tag" data-scroll-speed="0.2">Terraform</div>
+          <div class="skill-tag" data-scroll-speed="0.1">Jenkins</div>
+          <div class="skill-tag" data-scroll-speed="0.15">CI/CD</div>
+          <div class="skill-tag" data-scroll-speed="0.1">SQL & NoSQL</div>
+          <div class="skill-tag" data-scroll-speed="0.2">Kafka</div>
+          <div class="skill-tag" data-scroll-speed="0.1">Git & GitHub</div>
+          <div class="skill-tag" data-scroll-speed="0.15">Performance Tuning</div>
+        </div>
+
+        <h3 class="skills-subtitle" data-scroll-speed="0.2">Professional Credentials</h3>
+        <div class="grid">
+          <div class="grid-card" data-scroll-speed="0.1"><h4>Automation Pro I Certificate</h4><p>Workato</p></div>
+          <div class="grid-card" data-scroll-speed="0.15"><h4>Data Streaming Engineer</h4><p>Confluent</p></div>
+          <div class="grid-card" data-scroll-speed="0.1"><h4>Introducing Generative AI with AWS</h4><p>Udacity</p></div>
+          <div class="grid-card" data-scroll-speed="0.1"><h4>AWS Cloud AI Practitioner</h4><p>Amazon Web Services</p></div>
+          <div class="grid-card" data-scroll-speed="0.15"><h4>Docker & Kubernetes</h4><p>Udemy</p></div>
+          <div class="grid-card" data-scroll-speed="0.1"><h4>Core Java</h4><p>Coding Ninjas</p></div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-title" data-scroll-speed="0.4">
+          <h2>Featured Projects</h2>
+          <p>Highlights of my recent work.</p>
+        </div>
+        <div class="grid">
+          <div class="grid-card project-card" data-scroll-speed="0.1">
+            <div class="project-animation-container">
+              <canvas class="project-canvas" id="canvas-iot"></canvas>
+            </div>
+            <div class="project-content">
+              <h4>Simulating Real-time Data Streaming</h4>
+              <p>Designed and implemented comparative benchmarking for IoT streaming frameworks, applying Agile methodology to evaluate performance and resource usage.</p>
+              <div class="project-tags"><span>IoT</span><span>Benchmarking</span><span>Agile</span></div>
+            </div>
+          </div>
+          <div class="grid-card project-card" data-scroll-speed="0.15">
+            <div class="project-animation-container">
+                <canvas class="project-canvas" id="canvas-travel"></canvas>
+            </div>
+            <div class="project-content">
+              <h4>Travel Agent RESTful API Project</h4>
+              <p>Built a RESTful API for travel booking with integrated transactional support. Developed unit tests for code reliability and contributed to the solution roadmap.</p>
+              <div class="project-tags"><span>Java API</span><span>REST</span><span>JPA</span><span>Unit Testing</span></div>
+            </div>
+          </div>
+          <div class="grid-card project-card" data-scroll-speed="0.1">
+            <div class="project-animation-container">
+              <canvas class="project-canvas" id="canvas-k8s"></canvas>
+            </div>
+            <div class="project-content">
+              <h4>Kubernetes Web App Benchmarking</h4>
+              <p>Deployed a full monitoring stack (Prometheus, Grafana) and developed a Docker-based load generator to benchmark web application performance.</p>
+              <div class="project-tags"><span>Kubernetes</span><span>Docker</span><span>Grafana</span><span>Prometheus</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="education">
+          <div class="education-content" data-scroll-speed="0.2">
+              <h2 class="education-title">Master of Science</h2>
+              <h3 class="education-subtitle">Cloud Computing with First Class Distinction</h3>
+              <p class="education-university">Newcastle University</p>
+              <div class="education-details">
+                  <p>Core subjects included Advanced Cloud Computing, Enterprise Middleware, Distributed Algorithms, and Engineering for AI, providing a deep understanding of scalable, resilient, and intelligent cloud-native systems.</p>
+              </div>
+          </div>
+      </section>
+
+      <section id="contact">
+            <div data-scroll-speed="0.2">
+                <h2>Let's build something great.</h2>
+                <p class="contact-subtitle">I'm currently seeking new opportunities. Have a project in mind or just want to connect? Feel free to reach out.</p>
+                <a href="mailto:patilomkar970@gmail.com" class="email-link">patilomkar970@gmail.com</a>
+                <div class="social-links">
+                  <a href="https://www.linkedin.com/in/omkar-patil15/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+                  </a>
+                  <a href="https://github.com/omipatil33" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" fill="currentColor"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3.3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.3-11.1-29.9 2.6-57.7 0 0 21.9-7 72.1 25.6 20.8-6.2 43.2-9.2 66.1-9.2 22.9 0 45.3 3 66.1 9.2 50.1-32.6 72.1-25.6 72.1-25.6 13.7 27.8 5.2 51.4 2.6 57.7 16 17.7 23.6 31.4 23.6 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                  </a>
+                </div>
+            </div>
+      </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const mouse = { x: 9999, y: 9999 };
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            const interactiveElements = document.querySelectorAll('a, button, .grid-card, .skill-tag, .nav-links a');
+            
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX; 
+                mouse.y = e.clientY;
+                cursorDot.style.left = `${mouse.x}px`; 
+                cursorDot.style.top = `${mouse.y}px`;
+                cursorOutline.animate({ left: `${mouse.x}px`, top: `${mouse.y}px` }, { duration: 500, fill: "forwards" });
+            });
+
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorDot.classList.add('grow'));
+                el.addEventListener('mouseleave', () => cursorDot.classList.remove('grow'));
+            });
+
+            const cardElements = document.querySelectorAll('.grid-card');
+            cardElements.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    el.style.setProperty('--x', `${e.clientX - rect.left}px`);
+                    el.style.setProperty('--y', `${e.clientY - rect.top}px`);
+                });
+            });
+
+            const handleScroll = () => {
+                const elementsToAnimate = document.querySelectorAll('[data-scroll-speed]');
+                elementsToAnimate.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    const screenHeight = window.innerHeight;
+                    if (rect.top < screenHeight && rect.bottom > 0) {
+                        const scrollSpeed = parseFloat(el.getAttribute('data-scroll-speed')) || 0;
+                        const rotation = parseFloat(el.getAttribute('data-scroll-rotate')) || 0;
+                        const screenCenterY = screenHeight / 2;
+                        const elementCenterY = rect.top + rect.height / 2;
+                        const distanceFromCenter = screenCenterY - elementCenterY;
+                        const translateY = distanceFromCenter * scrollSpeed * -1;
+                        const rotateX = distanceFromCenter * 0.03 * rotation;
+                        el.style.transform = `translateY(${translateY}px) rotateX(${rotateX}deg)`;
+                    }
+                });
+            };
+            
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            handleScroll();
+
+            function setupCanvas(canvasId, animationType) {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                const container = canvas.parentElement;
+                let animationFrameId;
+                
+                function resizeCanvas() {
+                    canvas.width = container.clientWidth;
+                    canvas.height = container.clientHeight;
+                }
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+                if (animationType === 'iot') {
+                    let particles = [];
+                    class Particle {
+                        constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.vx = (Math.random() - 0.5) * 0.3; this.vy = (Math.random() - 0.5) * 0.3; this.radius = 1.5; }
+                        update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > canvas.width) this.vx *= -1; if (this.y < 0 || this.y > canvas.height) this.vy *= -1; }
+                        draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(173, 216, 230, 0.8)'; ctx.fill(); }
+                    }
+                    for (let i = 0; i < 50; i++) particles.push(new Particle());
+                    function animateIot() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        particles.forEach(p => p.update());
+                        for (let i = 0; i < particles.length; i++) {
+                            for (let j = i; j < particles.length; j++) {
+                                const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                                if (dist < 100) { ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.strokeStyle = `rgba(0, 255, 127, ${1 - dist / 100})`; ctx.lineWidth = 0.5; ctx.stroke(); }
+                            }
+                        }
+                        particles.forEach(p => p.draw());
+                        animationFrameId = requestAnimationFrame(animateIot);
+                    }
+                    animateIot();
+                }
+                else if (animationType === 'travel') {
+                    const icons = [
+                        { path: new Path2D('M480 32H96C69.5 32 48 53.5 48 80v352c0 26.5 21.5 48 48 48h384c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM224 192h192c4.4 0 8 3.6 8 8v32c0 4.4-3.6 8-8 8H224c-4.4 0-8-3.6-8-8v-32c0-4.4 3.6-8 8-8zm248 112H104c-4.4 0-8-3.6-8-8v-32c0-4.4 3.6-8 8-8h368c4.4 0 8 3.6 8 8v32c0 4.4-3.6 8-8 8z'), x: 0, y: 0, vx: 0.4, vy: 0.4, scale: 0.07 },
+                        { path: new Path2D('M476.3 41.3C492.3 57.2 496 79 496 99.4V112c0 44.2-35.8 80-80 80h-80c-8.8 0-16-7.2-16-16s7.2-16 16-16h80c26.5 0 48-21.5 48-48v-12.6c0-12.8-5.1-25.1-14.1-34.1L352 64H208L109.3 162.7c-9 9-14.1 21.3-14.1 34.1V224c0 26.5 21.5 48 48 48h80c8.8 0 16 7.2 16 16s-7.2 16-16 16h-80c-44.2 0-80-35.8-80-80v-27.4c0-20.4 3.7-42.2 19.7-58.2L160 32h192l124.3 9.3z'), x: 0, y: 0, vx: -0.5, vy: 0.5, scale: 0.07 },
+                    ];
+                    icons.forEach(i => { i.x = Math.random() * canvas.width; i.y = Math.random() * canvas.height; });
+                    function animateTravel() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        icons.forEach(icon => {
+                            icon.x += icon.vx; icon.y += icon.vy;
+                            if (icon.x < 0 || icon.x > canvas.width) icon.vx *= -1;
+                            if (icon.y < 0 || icon.y > canvas.height) icon.vy *= -1;
+                            ctx.save(); ctx.translate(icon.x, icon.y); ctx.scale(icon.scale, icon.scale); ctx.fillStyle = 'rgba(138, 43, 226, 0.7)'; ctx.fill(icon.path); ctx.restore();
+                        });
+                        animationFrameId = requestAnimationFrame(animateTravel);
+                    }
+                    animateTravel();
+                }
+                else if (animationType === 'k8s') {
+                    let angle = 0; let rotationSpeed = 0.001;
+                    canvas.addEventListener('mousemove', () => { rotationSpeed = 0.005; });
+                    canvas.addEventListener('mouseleave', () => { rotationSpeed = 0.001; });
+                    function animateK8s() {
+                        ctx.fillStyle = 'rgba(16, 16, 16, 0.1)';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        const centerX = canvas.width / 2; const centerY = canvas.height / 2;
+                        const radius = Math.min(centerX, centerY) * 0.6; const numSpokes = 7;
+                        angle += rotationSpeed;
+                        ctx.lineWidth = 2;
+                        let points = [];
+                        for (let i = 0; i < numSpokes; i++) {
+                            const spokeAngle = (i / numSpokes) * Math.PI * 2 + angle;
+                            points.push({x: centerX + Math.cos(spokeAngle) * radius, y: centerY + Math.sin(spokeAngle) * radius});
+                        }
+                        ctx.beginPath(); ctx.moveTo(points[0].x, points[0].y);
+                        for(let i = 1; i < points.length; i++) ctx.lineTo(points[i].x, points[i].y);
+                        ctx.closePath(); ctx.strokeStyle = 'rgba(55, 125, 255, 0.6)'; ctx.stroke();
+                        points.forEach(p => {
+                            ctx.beginPath(); ctx.moveTo(centerX, centerY); ctx.lineTo(p.x, p.y); ctx.strokeStyle = 'rgba(55, 125, 255, 0.4)'; ctx.stroke();
+                            ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, Math.PI * 2); ctx.fillStyle = '#377dff'; ctx.fill();
+                        });
+                        const hubRadius = 15 + 5 * Math.sin(angle * 5);
+                        ctx.beginPath(); ctx.arc(centerX, centerY, hubRadius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(55, 125, 255, 0.2)'; ctx.fill();
+                        ctx.strokeStyle = '#377dff'; ctx.stroke();
+                        animationFrameId = requestAnimationFrame(animateK8s);
+                    }
+                    animateK8s();
+                }
+            }
+            
+            setupCanvas('canvas-iot', 'iot');
+            setupCanvas('canvas-travel', 'travel');
+            setupCanvas('canvas-k8s', 'k8s');
+        });
+    </script>
+</body>
+</html>
